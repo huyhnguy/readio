@@ -1,4 +1,25 @@
+'use client'
+
 export default function Login() {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault()
+      const form = event.currentTarget
+      const data = {
+        email: form.email.value,
+        password: form.password.value,
+      }
+      const response = await fetch(form.action, {
+        method: form.method,
+        headers: {
+            'Content-Type': 'application/json', 
+          },
+        body: JSON.stringify(data),
+      })
+      if (response.ok) {
+        window.location.href = '/login'
+      }
+    }
+
     return (
       <>
         {/*
@@ -22,7 +43,7 @@ export default function Login() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="http://localhost:3001/api/login" method="POST" className="space-y-6">
+            <form action="http://localhost:3001/api/login" method="POST" className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                   Email address
