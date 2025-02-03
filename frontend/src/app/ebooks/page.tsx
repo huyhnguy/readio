@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import BookThumbnail from "../components/BookThumbnail";
 
 export default function Page() {
     const [value, setValue] = useState('');
@@ -33,14 +34,10 @@ export default function Page() {
             <main>
                 <h2>Search Results</h2>
                 { books.length > 0 && books.map((book, index) => {
-                    console.log(book.formats["image/jpeg"]);
                     return (                    
-                        <article key={index}>
-                            <img src={book.formats["image/jpeg"]} alt="" />
-                            <h3>{book.title}</h3>
-                        </article>)
-                    })
-                }
+                        <BookThumbnail index={index} book={book} />
+                    )
+                })}
             </main>
         </>
     )
