@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function Page() {
     const [value, setValue] = useState('');
+    const [books, setBooks] = useState([]);
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(value);
@@ -13,7 +14,10 @@ export default function Page() {
         console.log(url);
         fetch(url)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data.results);
+                setBooks(data.results)
+            })
             .catch(error => console.log(error));
     }
 
@@ -28,7 +32,15 @@ export default function Page() {
             </form>
             <main>
                 <h2>Search Results</h2>
-
+                { books.length > 0 && books.map((book, index) => {
+                    console.log(book.formats["image/jpeg"]);
+                    return (                    
+                        <article key={index}>
+                            <img src={book.formats["image/jpeg"]} alt="" />
+                            <h3>{book.title}</h3>
+                        </article>)
+                    })
+                }
             </main>
         </>
     )
