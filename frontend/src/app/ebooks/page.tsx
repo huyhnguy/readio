@@ -33,11 +33,17 @@ export default function Page() {
             </form>
             <main>
                 <h2>Search Results</h2>
-                { books.length > 0 && books.map((book, index) => {
-                    return (                    
-                        <BookThumbnail index={index} book={book} />
-                    )
-                })}
+                <div className="flex flex-wrap gap-4 justify-center">
+                    { books.length > 0 ? books.map((book, index) => {
+                        return (                    
+                            <BookThumbnail key={index} book={book} />
+                        )
+                        })
+                    : 
+                        <p>No results found</p>
+                    }
+                </div>
+
             </main>
         </>
     )
