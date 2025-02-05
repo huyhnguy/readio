@@ -6,6 +6,7 @@ import BookThumbnail from "../components/BookThumbnail";
 export default function Page() {
     const [value, setValue] = useState('');
     const [books, setBooks] = useState([]);
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(value);
